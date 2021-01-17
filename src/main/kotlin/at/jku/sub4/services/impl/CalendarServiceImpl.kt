@@ -17,7 +17,7 @@ class CalendarServiceImpl: CalendarService {
         const val POST_TIME: Long = 100
     }
 
-    private var entries: ArrayList<Entry> = ArrayList()
+    var entries: MutableList<Entry> = ArrayList()
     private var calender: Calendar = Calendar.getInstance()
     private var monthTitle: String = "Test"
 
