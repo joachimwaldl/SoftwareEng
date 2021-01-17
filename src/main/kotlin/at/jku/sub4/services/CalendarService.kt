@@ -6,5 +6,5 @@ interface CalendarService {
     fun createSchedule(entry: Entry)
     fun updateSchedule()
     fun displayEntries()
-    fun getNextEntry()
+    fun getNextEntry(): Entry
 }

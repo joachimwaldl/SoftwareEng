@@ -5,6 +5,7 @@ import at.jku.sub4.services.CalendarService
 import org.springframework.stereotype.Service
 import java.text.SimpleDateFormat
 import java.util.*
+import kotlin.math.abs
 
 @Service
 class CalendarServiceImpl: CalendarService {
@@ -33,11 +34,15 @@ class CalendarServiceImpl: CalendarService {
     }
 
     override fun createSchedule(entry: Entry) {
-        TODO("Not yet implemented")
+        entries.add(entry)
+
+        if (entries.size > 100) {
+            entries.removeAt(0)
+        }
     }
 
     override fun updateSchedule() {
-        var selectedCalender: Calendar = Calendar.getInstance()
+        val selectedCalender: Calendar = Calendar.getInstance()
         selectedCalender.set(Calendar.DATE, 1)
         selectedCalender.set(Calendar.HOUR, 0)
         selectedCalender.set(Calendar.MINUTE, 0)
@@ -49,7 +54,7 @@ class CalendarServiceImpl: CalendarService {
         calender.set(Calendar.DATE, totalDaysToShow)
 
         val toFillInNextMonthDays = 7 - calender.get(Calendar.DAY_OF_WEEK)
-        totalDaysToShow += Math.abs(toFillInPreviousMonthDays) + toFillInNextMonthDays
+        totalDaysToShow += abs(toFillInPreviousMonthDays) + toFillInNextMonthDays
 
         calender.set(Calendar.DATE, 1)
 
@@ -59,10 +64,10 @@ class CalendarServiceImpl: CalendarService {
     }
 
     override fun displayEntries() {
-        TODO("Not yet implemented")
+        entries.forEach { e -> e.toString() }
     }
 
-    override fun getNextEntry() {
-        TODO("Not yet implemented")
+    override fun getNextEntry(): Entry {
+        return entries.random()
     }
 }

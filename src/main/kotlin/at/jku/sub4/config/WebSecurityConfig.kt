@@ -20,20 +20,15 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 class WebSecurityConfig : WebSecurityConfigurerAdapter() {
 
-    @Bean
-    fun passwordEncoder(): PasswordEncoder {
-        return BCryptPasswordEncoder()
-    }
-
     @Throws(Exception::class)
     override fun configure(http: HttpSecurity) {
         http.cors().and().csrf().disable()
-                .authorizeRequests()
-                .antMatchers("/**").permitAll()
-                .anyRequest().authenticated()
-                .and()
-                .exceptionHandling()
-                .authenticationEntryPoint(HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED))
+            .authorizeRequests()
+            .antMatchers("/**").permitAll()
+            .antMatchers("/actuator/**").permitAll()
+            .anyRequest().authenticated()
+            .and()
+            .exceptionHandling().authenticationEntryPoint(HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED))
     }
 
     @Bean

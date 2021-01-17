@@ -5,8 +5,12 @@ import at.jku.sub4.services.DispatcherService
 import org.springframework.stereotype.Service
 
 @Service
-class CleanupDispatcher: DispatcherService {
+class CleanupDispatcher(
+    private val calendarServiceImpl: CalendarServiceImpl
+): DispatcherService {
+
     override fun dispatch(entry: Entry) {
-        TODO("Not yet implemented")
+        println("New Cleanup reported! $entry")
+        calendarServiceImpl.createSchedule(entry)
     }
 }

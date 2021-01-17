@@ -1,1 +1,1 @@
-docker build --build-arg JAR_FILE=build/libs/*.jar -t springio/gs-spring-boot-docker .
+docker build -t city-traffic-control/ss4 .
